@@ -1,3 +1,0 @@
-podinfo:
-  replicaCount: 1
-  backend: "http://backend-podinfo:9898/echo"
