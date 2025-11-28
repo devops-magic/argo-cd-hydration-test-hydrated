@@ -1,0 +1,29 @@
+kuma:
+  controlPlane:
+    autoscaling:
+      enabled: true 
+    ingress:
+      # -- Install K8s Ingress resource that exposes GUI and API
+      enabled: true
+      hostname: status.devops-magic.eu
+    # OpenShift SCC compliance: set runAsUser within allowed range [1000920000, 1000929999]
+    # Set hostUsers to false for restricted-v3 SCC compliance
+    podSecurityContext:
+      runAsNonRoot: true
+      runAsUser: 1000920000
+      fsGroup: 1000920000
+      hostUsers: false
+  
+  # Configure hooks security context for OpenShift SCC compliance
+  # This controls the CRD installation job (kuma-install-crds-)
+  # runAsUser must be in range [1000920000, 1000929999] for restricted-v2 SCC
+  hooks:
+    # Security context at the pod level for crd/webhook/ns hooks
+    podSecurityContext:
+      runAsNonRoot: true
+      runAsUser: 1000920000
+      fsGroup: 1000920000
+      hostUsers: false
+    # Security context at the container level for crd/webhook/ns hooks
+    containerSecurityContext:
+      readOnlyRootFilesystem: true

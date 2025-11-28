@@ -1,0 +1,10 @@
+apiVersion: v2
+name: kuma
+version: 0.1.0
+
+dependencies:
+  - name: kuma
+    version: 2.12.5
+    repository: "https://kumahq.github.io/charts"
+    values:
+      - values.yaml
