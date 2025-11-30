@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/version: 6.9.3
     helm.sh/chart: podinfo-6.9.3
   name: podinfo
-  namespace: argocd
+  namespace: argocd-e2e
 spec:
   ports:
     - name: http
@@ -31,7 +31,7 @@ metadata:
     app.kubernetes.io/version: 6.9.3
     helm.sh/chart: podinfo-6.9.3
   name: podinfo
-  namespace: argocd
+  namespace: argocd-e2e
 spec:
   replicas: 1
   selector:
@@ -128,12 +128,12 @@ metadata:
     app.kubernetes.io/name: podinfo
     app.kubernetes.io/version: 6.9.3
     helm.sh/chart: podinfo-6.9.3
-  name: podinfo-grpc-test-ifief
-  namespace: argocd
+  name: podinfo-grpc-test-elnpy
+  namespace: argocd-e2e
 spec:
   containers:
     - args:
-        - -addr=podinfo.argocd:9999
+        - -addr=podinfo.argocd-e2e:9999
       command:
         - grpc_health_probe
       image: stefanprodan/grpc_health_probe:v0.3.0
@@ -154,8 +154,8 @@ metadata:
     app.kubernetes.io/name: podinfo
     app.kubernetes.io/version: 6.9.3
     helm.sh/chart: podinfo-6.9.3
-  name: podinfo-jwt-test-rd1bk
-  namespace: argocd
+  name: podinfo-jwt-test-tirwu
+  namespace: argocd-e2e
 spec:
   containers:
     - command:
@@ -166,7 +166,7 @@ spec:
           curl -sH "Authorization: Bearer ${TOKEN}" ${PODINFO_SVC}/token/validate | grep test
       env:
         - name: PODINFO_SVC
-          value: podinfo.argocd:9898
+          value: podinfo.argocd-e2e:9898
       image: giantswarm/tiny-tools
       name: tools
   restartPolicy: Never
@@ -185,8 +185,8 @@ metadata:
     app.kubernetes.io/name: podinfo
     app.kubernetes.io/version: 6.9.3
     helm.sh/chart: podinfo-6.9.3
-  name: podinfo-service-test-fd9tz
-  namespace: argocd
+  name: podinfo-service-test-nrb3s
+  namespace: argocd-e2e
 spec:
   containers:
     - command:
@@ -196,7 +196,7 @@ spec:
           curl -s ${PODINFO_SVC}/api/info | grep version
       env:
         - name: PODINFO_SVC
-          value: podinfo.argocd:9898
+          value: podinfo.argocd-e2e:9898
       image: curlimages/curl:7.69.0
       name: curl
   restartPolicy: Never

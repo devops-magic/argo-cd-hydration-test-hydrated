@@ -1,7 +1,8 @@
 {
-  "repoURL": "https://github.com/devops-magic/argo-cd-hydration-test-hydrated",
-  "drySha": "3139280bb623e5f08ce3d812c82423ef8c194d0c",
+  "repoURL": "https://github.com/devops-magic/argo-cd-hydration-test-hydrated.git",
+  "drySha": "413871df2068db2410ac3def7f05cb0e9a417c66",
   "author": "Elias Rami <elias.rami@outlook.at>",
-  "date": "2025-11-27T23:23:05Z",
-  "subject": "fix(apps): podinfo"
+  "date": "2025-11-30T21:40:48Z",
+  "subject": "Revert \"3139280: fix(apps): podinfo\"",
+  "body": "This reverts commit 1cc8a9f784db5353f9ed3b8a387a2a85d7c6d752.\n"
 }
