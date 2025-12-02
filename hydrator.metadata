@@ -1,6 +1,6 @@
 {
   "repoURL": "https://github.com/devops-magic/argo-cd-hydration-test-hydrated.git",
-  "drySha": "6d0c57ecce548f25aecd9ada6a908eac30311c3f",
+  "drySha": "8caa28c4d82f32128614c19881cee7f66bd8f77b",
   "author": "Elias Rami <elias.rami@outlook.at>",
   "date": "2025-12-03T00:17:03+01:00",
   "subject": "feat(apps): add rancher"

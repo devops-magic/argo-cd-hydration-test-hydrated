@@ -121,7 +121,6 @@ spec:
               weight: 100
       containers:
         - args:
-            - --no-cacerts
             - --http-listen-port=80
             - --https-listen-port=443
             - --add-local=true
@@ -177,10 +176,11 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
+    cert-manager.io/issuer: rancher-ui
+    cert-manager.io/issuer-kind: Issuer
     nginx.ingress.kubernetes.io/proxy-connect-timeout: "30"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "1800"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "1800"
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
   labels:
     app: rancher-ui
     chart: rancher-2.12.1
@@ -188,9 +188,8 @@ metadata:
     release: rancher-ui
   name: rancher-ui
 spec:
-  ingressClassName: nginx
   rules:
-    - host: rancher.k8s.ad-its.local
+    - host: rancher.example.com
       http:
         paths:
           - backend:
@@ -200,6 +199,23 @@ spec:
                   number: 80
             path: /
             pathType: ImplementationSpecific
+  tls:
+    - hosts:
+        - rancher.example.com
+      secretName: tls-rancher-ingress
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  labels:
+    app: rancher-ui
+    chart: rancher-2.12.1
+    heritage: Helm
+    release: rancher-ui
+  name: rancher-ui
+spec:
+  ca:
+    secretName: tls-rancher
 ---
 apiVersion: v1
 kind: ServiceAccount
