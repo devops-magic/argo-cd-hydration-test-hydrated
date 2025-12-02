@@ -3,11 +3,11 @@ kind: Service
 metadata:
   labels:
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: podinfo
+    app.kubernetes.io/name: my-app-podinfo
     app.kubernetes.io/version: 6.9.3
     helm.sh/chart: podinfo-6.9.3
-  name: podinfo
-  namespace: argocd-e2e
+  name: my-app-podinfo
+  namespace: argocd
 spec:
   ports:
     - name: http
@@ -19,7 +19,7 @@ spec:
       protocol: TCP
       targetPort: grpc
   selector:
-    app.kubernetes.io/name: podinfo
+    app.kubernetes.io/name: my-app-podinfo
   type: ClusterIP
 ---
 apiVersion: apps/v1
@@ -27,16 +27,16 @@ kind: Deployment
 metadata:
   labels:
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: podinfo
+    app.kubernetes.io/name: my-app-podinfo
     app.kubernetes.io/version: 6.9.3
     helm.sh/chart: podinfo-6.9.3
-  name: podinfo
-  namespace: argocd-e2e
+  name: my-app-podinfo
+  namespace: argocd
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: podinfo
+      app.kubernetes.io/name: my-app-podinfo
   strategy:
     rollingUpdate:
       maxUnavailable: 1
@@ -47,7 +47,7 @@ spec:
         prometheus.io/port: "9898"
         prometheus.io/scrape: "true"
       labels:
-        app.kubernetes.io/name: podinfo
+        app.kubernetes.io/name: my-app-podinfo
     spec:
       containers:
         - command:
@@ -125,15 +125,15 @@ metadata:
     sidecar.istio.io/inject: "false"
   labels:
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: podinfo
+    app.kubernetes.io/name: my-app-podinfo
     app.kubernetes.io/version: 6.9.3
     helm.sh/chart: podinfo-6.9.3
-  name: podinfo-grpc-test-sntrh
-  namespace: argocd-e2e
+  name: my-app-podinfo-grpc-test-p3jj0
+  namespace: argocd
 spec:
   containers:
     - args:
-        - -addr=podinfo.argocd-e2e:9999
+        - -addr=my-app-podinfo.argocd:9999
       command:
         - grpc_health_probe
       image: stefanprodan/grpc_health_probe:v0.3.0
@@ -151,11 +151,11 @@ metadata:
     sidecar.istio.io/inject: "false"
   labels:
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: podinfo
+    app.kubernetes.io/name: my-app-podinfo
     app.kubernetes.io/version: 6.9.3
     helm.sh/chart: podinfo-6.9.3
-  name: podinfo-jwt-test-xnifh
-  namespace: argocd-e2e
+  name: my-app-podinfo-jwt-test-lpx3f
+  namespace: argocd
 spec:
   containers:
     - command:
@@ -166,7 +166,7 @@ spec:
           curl -sH "Authorization: Bearer ${TOKEN}" ${PODINFO_SVC}/token/validate | grep test
       env:
         - name: PODINFO_SVC
-          value: podinfo.argocd-e2e:9898
+          value: my-app-podinfo.argocd:9898
       image: giantswarm/tiny-tools
       name: tools
   restartPolicy: Never
@@ -182,11 +182,11 @@ metadata:
     sidecar.istio.io/inject: "false"
   labels:
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: podinfo
+    app.kubernetes.io/name: my-app-podinfo
     app.kubernetes.io/version: 6.9.3
     helm.sh/chart: podinfo-6.9.3
-  name: podinfo-service-test-llvj5
-  namespace: argocd-e2e
+  name: my-app-podinfo-service-test-bprc0
+  namespace: argocd
 spec:
   containers:
     - command:
@@ -196,7 +196,7 @@ spec:
           curl -s ${PODINFO_SVC}/api/info | grep version
       env:
         - name: PODINFO_SVC
-          value: podinfo.argocd-e2e:9898
+          value: my-app-podinfo.argocd:9898
       image: curlimages/curl:7.69.0
       name: curl
   restartPolicy: Never
