@@ -1,8 +1,7 @@
 {
   "repoURL": "https://github.com/devops-magic/argo-cd-hydration-test-hydrated.git",
-  "drySha": "413871df2068db2410ac3def7f05cb0e9a417c66",
+  "drySha": "15b3bb3acac9b8b5716227558e6036409f909c98",
   "author": "Elias Rami <elias.rami@outlook.at>",
-  "date": "2025-11-30T21:40:48Z",
-  "subject": "Revert \"3139280: fix(apps): podinfo\"",
-  "body": "This reverts commit 1cc8a9f784db5353f9ed3b8a387a2a85d7c6d752.\n"
+  "date": "2025-12-03T00:17:03+01:00",
+  "subject": "feat(apps): add rancher"
 }
